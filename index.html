@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <section id="storyDetails">
+        <h1 id="storyTitle"></h1>
+        <h4 id="storyAuthor"></h4>
+    </section>
+    <section id="sceneDetails">
+        <h3 id="sceneTitle"></h3>
+        <p id="sceneCopyText"></p>
+    </section>
+    <section id="inputs">
+        <input id="storyTitleIn" placeholder="story title"></input>
+        <input id="storyAuthorIn" placeholder="author"></input>
+        <button onclick="saveStory()">Save Story</button>
+        <input id="sceneTitleIn" placeholder="scene title"></input>
+        <input id="sceneCopyTextIn" placeholder="scene description"></input>
+        <button onclick="saveScene()">Save Scene</button>
+    </section>
+    <button onclick="prevScene()">Prev</button><button onclick="nextScene()">Next</button>
+    <hr />
+    <p id="sceneImage" onclick="nextImage()"></p>
+
+</body>
+<footer>
+    <script src="scripts/client.js"></script>
+</footer>
+</html>
