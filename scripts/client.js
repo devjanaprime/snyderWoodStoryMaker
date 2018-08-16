@@ -70,8 +70,8 @@ const beats = [];
 const images = [];
 
 let story = {
-    title: 'noTitle',
-    author: 'noAuthor',
+    title: '',
+    author: '',
     scenes: []
 }
 
@@ -79,6 +79,7 @@ class Scene{
   constructor( copyText, imageIndex, title ) {
     if( verbose ) console.log( 'instantiating Scene:',copyText, imageIndex, title );
     this.copyText = copyText; 
+    this.cutsomImage = false;
     this.imageIndex = imageIndex;
     this.title = title;
   } //ned constructor
@@ -164,8 +165,12 @@ let saveScene = () =>{
 } // end saveScene
 
 let saveStory = () =>{
-  story.title = document.getElementById( 'storyTitleIn' ).value;
-  story.author = document.getElementById( 'storyAuthorIn' ).value;
+  if( document.getElementById( 'storyTitleIn' ).value  ){
+    story.title = document.getElementById( 'storyTitleIn' ).value;
+  }
+  if( document.getElementById( 'storyAuthorIn' ).value ){
+    story.author = document.getElementById( 'storyAuthorIn' ).value;
+  }
   updateStoryDetails();
   document.getElementById( 'storyTitleIn' ).value = '';
   document.getElementById( 'storyAuthorIn' ).value = '';
