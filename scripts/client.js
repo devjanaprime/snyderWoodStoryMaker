@@ -94,7 +94,7 @@ class Scene{
   } //ned constructor
 } // end Scene
 
-let currentBeat = 0;
+let currentBeat = -1;
 
 let addBeat = ( newBeat ) =>{
   if( verbose ) console.log( 'in newBeat: ', newBeat );
@@ -116,6 +116,8 @@ let displayCurrentScene = () => {
   document.getElementById( 'sceneTitle' ).innerHTML = story.scenes[ currentBeat ].title;
   document.getElementById( 'sceneImage' ).innerHTML = '<img src="' + images[ story.scenes[ currentBeat ].imageIndex ] + '">';
   document.getElementById( 'sceneCopyText' ).innerHTML = story.scenes[ currentBeat ].copyText;
+  document.getElementById( 'sceneIndex' ).innerHTML = currentBeat + 1;
+  document.getElementById( 'sceneCount' ).innerHTML = story.scenes.length;
 } // end displayCurrentPanel
 
 let init = () =>{
@@ -126,7 +128,7 @@ let init = () =>{
 
 let initStories = () =>{
   for( beat in beats ){
-    story.scenes.push( new Scene( 'copy text ' + beat, beat, 'title ' + beat ) );
+    story.scenes.push( new Scene( 'copy text ' + beat, beat, beats[ beat ] ) );
   }
 } // let initStories
 
@@ -161,18 +163,22 @@ let saveScene = () =>{
   if( document.getElementById( 'sceneCopyTextIn' ).value != '' ){
     if( verbose ) console.log( 'saving scene Title' );
     story.scenes[ currentBeat ].copyText = document.getElementById( 'sceneCopyTextIn' ).value;
+    document.getElementById( 'sceneCopyTextIn' ).value = '';
   }
-  if( document.getElementById( 'sceneCopyTextIn' ).value != '' ){
+  if( document.getElementById( 'sceneTitleIn' ).value != '' ){
     if( verbose ) console.log( 'saving scene Title' );
     story.scenes[ currentBeat ].title = document.getElementById( 'sceneTitleIn' ).value;
+    document.getElementById( 'sceneTitleIn' ).value = '';
   }
-  updateSceneDetails();
+  displayCurrentScene();
 } // end saveScene
 
 let saveStory = () =>{
   story.title = document.getElementById( 'storyTitleIn' ).value;
   story.author = document.getElementById( 'storyAuthorIn' ).value;
   updateStoryDetails();
+  document.getElementById( 'storyTitleIn' ).value = '';
+  document.getElementById( 'storyAuthorIn' ).value = '';
 } // end saveStory
 
 let setupBeats = () =>{
@@ -228,10 +234,14 @@ let setupImages = () =>{
   /// - end temp
 } // end setupImages
 
-let updateSceneDetails = () => {
-  document.getElementById( 'sceneTitle' ).innerHTML = story.scenes[ currentBeat ].title;
-  document.getElementById( 'sceneCopyText' ).innerHTML = story.scenes[ currentBeat ].copyText;
-} // end updateStoryDetails
+let toggleElement = function( el ){
+	if( window.getComputedStyle( el ).display === 'none') {
+		el.style.display = 'block';
+  }
+  else{
+		el.style.display = 'none';
+  }
+};
 
 let updateStoryDetails = () => {
   document.getElementById( 'storyTitle' ).innerHTML = story.title;
